@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 //@Listeners(listeners.ListenersPage.class)
 
-public class SpreeBaseClass implements ITestListener {
+public class TestBaseClass implements ITestListener {
     public static WebDriver driver;
 
 

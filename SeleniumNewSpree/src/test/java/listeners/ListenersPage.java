@@ -1,13 +1,6 @@
 package listeners;
 
-import Tests.SpreeBaseClass;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
-
-import java.io.IOException;
-
- /** public class ListenersPage extends SpreeBaseClass implements ITestListener {
+/** public class ListenersPage extends BaseClass implements ITestListener {
         @Override
         public void onFinish(ITestContext result) {
             // TODO Auto-generated method stub

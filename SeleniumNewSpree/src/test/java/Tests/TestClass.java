@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 
-public class SpreeTestClass extends SpreeBaseClass{
+public class TestClass extends TestBaseClass {
     @Test(dataProvider = "userDetail")
     public void loginAndLogout(String email, String password) {
         HomePage homePg = new HomePage(driver);

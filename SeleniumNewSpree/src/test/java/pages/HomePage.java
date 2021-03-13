@@ -60,6 +60,7 @@ public class HomePage {
     }
 
     public void navigateToHome() {
+
         home.click();
     }
 
