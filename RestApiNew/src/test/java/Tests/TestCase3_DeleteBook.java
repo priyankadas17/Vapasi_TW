@@ -1,5 +1,12 @@
 package Tests;
 
+/**  3. [DELETE]
+ 1. AddBook: [id=123]
+ 2. Validate Book recently added getBook(id=123)
+ 3. Delete the Book Added (id=123)
+ 4. Validate getBook(id=123)
+ 5. AddBook(id=123) // User Should be able to add Book  **/
+
 import Requests.AddBookRequest;
 import Requests.DeleteBookReq;
 import Responses.AddBookResponse;
@@ -15,30 +22,28 @@ public class TestCase3_DeleteBook {
     @Test
 
     public void addBookAndGetId(){
-        //Add a book with details
 
+        //Add a book with details
         RestAssured.baseURI = "http://216.10.245.166";
         AddBookRequest addBookRequest = new AddBookRequest();
         addBookRequest.setName("Learn API Testing");
-        addBookRequest.setIsbn("R9773");
-        addBookRequest.setAisle("5693");
+        addBookRequest.setIsbn("R94373");
+        addBookRequest.setAisle("85693");
         addBookRequest.setAuthor("Chetan Bhagat");
 
         //Response for add book
-
-        Response response  = given().log().all().header("Content-Type","application/json")
+        Response responseAddBook  = given().log().all().header("Content-Type","application/json")
                 .body(addBookRequest)
                 .when().post("/Library/Addbook.php")
                 .then().log().all().assertThat().statusCode(200).extract().response();
 
         //Store the response
-        System.out.println(response.asString());
-        AddBookResponse addBookResponse = response.body().as(AddBookResponse.class);
+        System.out.println(responseAddBook.asString());
+        AddBookResponse addBookResponse = responseAddBook.body().as(AddBookResponse.class);
         String searchById = addBookResponse.getId();
         System.out.println("Add Book response Id is " + searchById);
 
         //Get Book with the ID obtained
-
         Response responseForGetBook = given().queryParam("ID", addBookResponse.getId())
                 .header("Content-Type","application/json")
                 .when().get("/Library/GetBook.php")
@@ -64,7 +69,6 @@ public class TestCase3_DeleteBook {
                 .then().statusCode(404).extract().response();
 
         //Add the book again
-
         Response addAgain  = given().log().all().header("Content-Type","application/json")
                 .body(addBookRequest)
                 .when().post("/Library/Addbook.php")

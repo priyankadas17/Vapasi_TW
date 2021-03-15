@@ -1,5 +1,10 @@
 package Tests;
 
+/**   Hit Library API
+ 1. [POSITIVE TC]
+ -AddBook()
+ -Validate Book that has been added getBook(id)   **/
+
 import Requests.AddBookRequest;
 import Responses.AddBookResponse;
 import io.restassured.RestAssured;
@@ -12,9 +17,8 @@ public class TestCase1_AddBook {
     @Test
 
     public void addBookAndGetId(){
+
         //Add a book with details
-
-
             RestAssured.baseURI = "http://216.10.245.166";
             AddBookRequest addBookRequest = new AddBookRequest();
             addBookRequest.setName("Learn API Testing");
@@ -23,7 +27,6 @@ public class TestCase1_AddBook {
             addBookRequest.setAuthor("Rahul Shetty");
 
             //The Response
-
             Response response = given().log().all().header("Content-Type", "application/json")
                     .body(addBookRequest)
                     .when().post("/Library/Addbook.php")
@@ -33,7 +36,8 @@ public class TestCase1_AddBook {
             AddBookResponse addBookResponse = response.body().as(AddBookResponse.class);
             System.out.println("Add Book response Id is " + addBookResponse.getId());
 
-        Response responseForGetBook = given().queryParam("ID", addBookResponse.getId())
+            //Get Book with the ID obtained
+            Response responseForGetBook = given().queryParam("ID", addBookResponse.getId())
                 .header("Content-Type","application/json")
                 .when().get("/Library/GetBook.php")
                 .then().statusCode(200).extract().response();
